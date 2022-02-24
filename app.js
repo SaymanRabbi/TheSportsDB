@@ -109,19 +109,26 @@ const url = `https://jsonplaceholder.typicode.com/comments`;
         // the meal db এর খালতো ভাই the sports db থেকে কিছু জিনিস এনে দেখাবে। একজাক্টলি কি দেখাতে হবে। সেটা আমি বলে দিবো না। তুমি ওদের ওয়েবসাইট এ যাও। সেখানে কি কি লেখা আছে সেগুলা পড়ো। api গুলা এর ছোট করে কি কি করে বলা আছে। সেগুলা দেখো। তারপর কিছু ডাটা লোড করো। সেই ডাটাগুলো দেখাও। এইখানে সার্চ ফাংশনালিটি ইমপ্লিমেন্ট করো। অনেকটা mealdb এর মতো। আবার কোন একটাতে ক্লিক করলে সেটার ডিটেল দেখাবে। 
         // -----load data-------
 const showPlayer = document.getElementById('show-player');
-        const errorText = document.getElementById('error-text')
+const errorText = document.getElementById('error-text')
+let basicAddon = document.getElementById('basic-addon');
         document.getElementById('basic-addon').addEventListener('click', () => {
         const input = document.getElementById('input');
         const inputText = input.value;
-        input.value = '';
-                if (inputText== '') {
+                input.value = '';
+                  const sniper = `<div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                  </div>..wait`
+                basicAddon.innerHTML = sniper;
+                if (inputText == '') {
+                        basicAddon.innerText='Search'
                         errorText.innerHTML=`<p class="text-danger fw-bold"> Not Found Anything</p>
                         <img src="./img/eror.jpeg" class="img-fluid" alt="">`
                       showPlayer.innerHTML = '';
                         return;
                 }
                 else {
-                        const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${inputText}`;
+                        
+                  const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${inputText}`;
                   fetch(url)
                 .then(res => res.json())
                 .then(data => displayPlayer(data));
@@ -130,6 +137,7 @@ const showPlayer = document.getElementById('show-player');
 })
         
 const displayPlayer = (name) => {
+        basicAddon.innerText='Search'
         if (name.player == 0 || name.player == null) {
                 errorText.innerHTML=`<p class="text-danger fw-bold"> Not Found Anything</p>
                    <img src="./img/eror.jpeg" class="img-fluid" alt="">`

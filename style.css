@@ -17,3 +17,7 @@ body {
 #basic-addon {
   cursor: pointer;
 }
+.spinner-border {
+  height: 25px;
+  width: 25px;
+}
